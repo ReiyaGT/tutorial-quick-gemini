@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Penggunaan Quick Gemini</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gemini: {
+                            base: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#6366f1',
+                            purple: '#8b5cf6',
+                            cyan: '#06b6d4',
+                            glow: '#a855f7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            border-image: linear-gradient(135deg, #a855f7, #06b6d4) 1;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-purple-500 selection:text-white">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                    <i class="fa-solid font-bold text-xl text-white">⚡</i>
+                </div>
+                <span class="font-extrabold text-xl tracking-tight text-white">Quick<span class="gradient-text">Gemini</span></span>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#langkah1" class="hover:text-purple-400 transition-colors flex items-center space-x-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-800 text-xs flex items-center justify-center border border-slate-700">1</span>
+                    <span>Login Google</span>
+                </a>
+                <a href="#langkah2" class="hover:text-purple-400 transition-colors flex items-center space-x-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-800 text-xs flex items-center justify-center border border-slate-700">2</span>
+                    <span>API Key & Model</span>
+                </a>
+                <a href="#langkah3" class="hover:text-purple-400 transition-colors flex items-center space-x-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-800 text-xs flex items-center justify-center border border-slate-700">3</span>
+                    <span>Chat & Settings</span>
+                </a>
+                <a href="#simulasi" class="hover:text-purple-400 transition-colors flex items-center space-x-1 text-cyan-400">
+                    <i class="fa-solid fa-flask text-xs"></i>
+                    <span>Coba Simulasi</span>
+                </a>
+            </nav>
+
+            <a href="#simulasi" class="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium text-sm hover:from-purple-500 hover:to-indigo-500 transition-all shadow-md shadow-purple-600/20 active:scale-95">
+                Simulasi Interactive
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-20 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/3 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-6">
+                <i class="fa-solid fa-book-open"></i> Panduan Resmi Pengguna
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
+                Kuasai Aplikasi <span class="gradient-text">Quick Gemini</span> dalam 3 Langkah Mudah
+            </h1>
+            <p class="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
+                Pelajari cara menghubungkan akun Google Anda, mengatur API key, memilih model kecerdasan buatan terbaik, hingga menyesuaikan tema tampilan sesuai kenyamanan Anda.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#langkah1" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition-all border border-slate-700 flex items-center justify-center gap-2">
+                    Mulai Membaca Panduan <i class="fa-solid fa-arrow-down text-xs"></i>
+                </a>
+                <a href="#simulasi" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-semibold transition-all shadow-lg shadow-purple-500/25 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-gamepad"></i> Coba Demo Interaktif
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Tutorial Steps Section -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
+
+        <!-- LANGKAH 1 -->
+        <section id="langkah1" class="scroll-mt-24">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-purple-500/30 transition-all glow-effect">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 text-indigo-400 text-sm font-semibold border border-indigo-500/20">
+                            Langkah 1
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white">Login dengan Akun Google</h2>
+                        <p class="text-slate-300 leading-relaxed text-base">
+                            Untuk memastikan percakapan dan pengaturan Anda aman serta tersimpan secara permanen di cloud, Anda diwajibkan untuk masuk menggunakan akun Google resmi.
+                        </p>
+                        
+                        <div class="space-y-3 pt-2">
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <p class="text-sm text-slate-300"><strong class="text-slate-100">Simpan Riwayat Percakapan (History):</strong> Semua percakapan Anda dengan AI tersimpan rapi dan dapat diakses kapan saja dari perangkat manapun.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <p class="text-sm text-slate-300"><strong class="text-slate-100">Keamanan Terjamin:</strong> Otentikasi menggunakan standar keamanan Google OAuth tanpa menyimpan password Anda di server kami.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 flex items-center gap-3">
+                            <i class="fa-solid fa-lightbulb text-yellow-500 text-lg shrink-0"></i>
+                            <span>Klik tombol <strong>"Sign in with Google"</strong> di pojok kanan atas aplikasi atau di halaman sambutan awal.</span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Card / Graphic -->
+                    <div class="lg:col-span-5 bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-inner flex flex-col items-center justify-center space-y-4">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-3xl shadow-md">
+                            🔐
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-slate-200 font-semibold">Otentikasi Aman</h3>
+                            <p class="text-xs text-slate-400 mt-1">Sinkronisasi Cloud dengan Google Drive / Firebase</p>
+                        </div>
+                        <button class="w-full py-2.5 px-4 rounded-xl bg-white text-slate-800 font-medium text-sm flex items-center justify-center gap-3 shadow-md opacity-90 cursor-default">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            Sign in with Google
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LANGKAH 2 -->
+        <section id="langkah2" class="scroll-mt-24">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-purple-500/30 transition-all glow-effect">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-purple-500/10 text-purple-400 text-sm font-semibold border border-purple-500/20">
+                        Langkah 2
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white">Memasukkan API Key & Memilih Model AI</h2>
+                    <p class="text-slate-300 leading-relaxed text-base">
+                        Aplikasi Quick Gemini membutuhkan API Key pribadi Anda untuk terhubung langsung ke mesin kecerdasan buatan Google secara resmi, cepat, dan tanpa batas.
+                    </p>
+
+                    <!-- Tutorial Sub-Steps -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                        <!-- Box A: Cara Buat Key -->
+                        <div class="bg-slate-900/80 rounded-2xl p-6 border border-slate-800 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">1</div>
+                                <h3 class="font-bold text-lg text-slate-100">Cara Mendapatkan API Key</h3>
+                            </div>
+                            <ol class="space-y-3 text-sm text-slate-300 list-decimal list-inside">
+                                <li class="leading-relaxed">
+                                    Buka situs resmi Google AI Studio: <br>
+                                    <a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 underline font-medium mt-1">
+                                        aistudio.google.com/api-keys <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                    </a>
+                                </li>
+                                <li>Login dengan akun Google milik Anda.</li>
+                                <li>Klik tombol <span class="bg-slate-800 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30">"Create API key"</span>.</li>
+                                <li>Salin (Copy) kode API Key unik yang diberikan.</li>
+                                <li>Buka Settings di Quick Gemini, tempel (Paste) kunci tersebut pada kolom <strong>Gemini API Key</strong>.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Box B: Pilihan Model -->
+                        <div class="bg-slate-900/80 rounded-2xl p-6 border border-slate-800 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">2</div>
+                                <h3 class="font-bold text-lg text-slate-100">Pilihan Model AI</h3>
+                            </div>
+                            <p class="text-sm text-slate-300">
+                                Pilih varian kecerdasan yang sesuai dengan kebutuhan tugas Anda:
+                            </p>
+                            <div class="space-y-2">
+                                <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700/50">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold text-purple-300 text-sm">Gemini 1.5 Flash</span>
+                                        <span class="text-[10px] bg-green-900/60 text-green-300 px-2 py-0.5 rounded">Rekomendasi / Cepat</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-1">Sangat cepat, efisien, dan cocok untuk percakapan sehari-hari atau tugas sederhana.</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700/50">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold text-cyan-300 text-sm">Gemini 1.5 Pro</span>
+                                        <span class="text-[10px] bg-cyan-900/60 text-cyan-300 px-2 py-0.5 rounded">Kompleks & Analitis</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-1">Ideal untuk analisa data mendalam, penulisan dokumen panjang, dan pemograman rumit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LANGKAH 3 -->
+        <section id="langkah3" class="scroll-mt-24">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-purple-500/30 transition-all glow-effect">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 text-cyan-400 text-sm font-semibold border border-cyan-500/20">
+                            Langkah 3
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white">Memulai Chat Baru & Mode Gelap</h2>
+                        <p class="text-slate-300 leading-relaxed text-base">
+                            Setelah konfigurasi selesai, Anda siap memulai percakapan baru serta menyesuaikan tampilan visual agar nyaman di mata.
+                        </p>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-purple-400 shrink-0 font-bold">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-100">Memulai Percakapan Baru (New Chat)</h4>
+                                    <p class="text-sm text-slate-400 mt-0.5">Klik tombol <strong>"+ New Chat"</strong> pada bilah navigasi samping (sidebar) untuk membuat topik percakapan yang bersih.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400 shrink-0 font-bold">
+                                    <i class="fa-solid fa-moon"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-100">Mengaktifkan Dark Mode (Mode Gelap)</h4>
+                                    <p class="text-sm text-slate-400 mt-0.5">Buka menu <strong>Settings (Pengaturan)</strong> &gt; pilih opsi <strong>Theme</strong> &gt; aktifkan <strong>Dark Mode</strong> untuk mengurangi kelelahan mata saat pemakaian di malam hari.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Illustration -->
+                    <div class="lg:col-span-5 bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Navigasi Pengaturan</span>
+                            <span class="text-xs text-purple-400"><i class="fa-solid fa-gear"></i> Settings</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/60">
+                                <span class="text-sm text-slate-200">Tampilan Theme</span>
+                                <span class="text-xs px-2.5 py-1 rounded-md bg-purple-600 text-white font-medium flex items-center gap-1.5">
+                                    <i class="fa-solid fa-moon"></i> Dark
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/60">
+                                <span class="text-sm text-slate-200">Riwayat Chat</span>
+                                <span class="text-xs text-green-400 flex items-center gap-1">
+                                    <i class="fa-solid fa-circle text-[8px]"></i> Auto-Sync
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATOR INTERAKTIF SECTION -->
+        <section id="simulasi" class="scroll-mt-24 pt-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="px-3 py-1 rounded-full bg-cyan-950 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Demo Langsung
+                </span>
+                <h2 class="text-3xl font-bold text-white mt-3">Simulasi Aplikasi Quick Gemini</h2>
+                <p class="text-slate-400 text-sm mt-2">
+                    Cobalah mensimulasikan langkah 1, 2, dan 3 secara langsung di dalam mockup aplikasi di bawah ini!
+                </p>
+            </div>
+
+            <!-- SIMULATED APP WINDOW CONTAINER -->
+            <div id="simulatedApp" class="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-700 shadow-2xl transition-all duration-300 bg-slate-900 text-slate-100">
+                
+                <!-- Mockup Window Header -->
+                <div class="bg-slate-950/80 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        <span class="ml-2 text-xs text-slate-400 font-mono">QuickGemini_App_v1.0.exe</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-xs">
+                        <span id="simStatusAuth" class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 flex items-center gap-1">
+                            <i class="fa-solid fa-user-slash text-[10px]"></i> Belum Login
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Mockup App Body -->
+                <div class="grid grid-cols-1 md:grid-cols-12 min-h-[480px]">
+                    
+                    <!-- App Sidebar -->
+                    <div class="md:col-span-4 bg-slate-950/40 p-4 border-r border-slate-800/80 flex flex-col justify-between space-y-4">
+                        <div class="space-y-4">
+                            <!-- User Profile Box -->
+                            <div id="userProfileBox" class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div id="userAvatar" class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-300">
+                                        ?
+                                    </div>
+                                    <div>
+                                        <p id="userName" class="text-xs font-semibold text-slate-200">Tamu (Guest)</p>
+                                        <p id="userEmail" class="text-[10px] text-slate-400">Silakan login Google</p>
+                                    </div>
+                                </div>
+                                <button id="btnLoginSim" class="text-xs px-2.5 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all">
+                                    Login
+                                </button>
+                            </div>
+
+                            <!-- New Chat Button -->
+                            <button id="btnNewChatSim" class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-xs flex items-center justify-center gap-2 transition-all shadow-md">
+                                <i class="fa-solid fa-plus"></i> New Chat
+                            </button>
+
+                            <!-- Chat History List -->
+                            <div>
+                                <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2">History Chat</p>
+                                <div id="simHistoryList" class="space-y-1">
+                                    <div class="p-2 rounded-lg bg-slate-800/40 text-xs text-slate-400 flex items-center justify-between cursor-pointer hover:bg-slate-800/80">
+                                        <span class="truncate max-w-[140px]"><i class="fa-regular fa-message mr-1.5"></i> Diskusi Resep Makanan</span>
+                                        <span class="text-[9px] text-slate-500">Terkirim</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar Bottom / Settings Trigger -->
+                        <div class="pt-2 border-t border-slate-800">
+                            <button id="btnOpenSettingsSim" class="w-full py-2 px-3 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center justify-between transition-all">
+                                <span><i class="fa-solid fa-gear mr-2 text-slate-400"></i> Pengaturan</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- App Chat Main Content -->
+                    <div class="md:col-span-8 p-4 flex flex-col justify-between bg-inherit">
+                        
+                        <!-- Top Bar Chat Info -->
+                        <div class="flex items-center justify-between border-b border-slate-800/60 pb-3">
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2">
+                                    <span>Percakapan Utama</span>
+                                    <span id="currentModelBadge" class="text-[10px] px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 font-mono">Gemini 1.5 Flash</span>
+                                </h4>
+                            </div>
+                            <div class="text-xs text-slate-400 flex items-center gap-1">
+                                <i class="fa-solid fa-cloud text-green-400 text-[10px]"></i> Cloud Sync
+                            </div>
+                        </div>
+
+                        <!-- Chat Messages Window -->
+                        <div id="simChatBox" class="py-4 space-y-3 overflow-y-auto max-h-[280px] text-xs">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-6 h-6 rounded-md bg-purple-600 flex items-center justify-center text-white text-[10px] font-bold">AI</div>
+                                <div class="bg-slate-800/80 p-3 rounded-xl rounded-tl-none max-w-[85%] border border-slate-700/50 leading-relaxed text-slate-200">
+                                    Halo! Selamat datang di simulasi Quick Gemini. Pastikan Anda telah memasukkan API Key di menu <strong>Pengaturan</strong> untuk mulai berkirim pesan secara nyata!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Box -->
+                        <div class="pt-3 border-t border-slate-800/60">
+                            <form id="simChatForm" class="flex gap-2">
+                                <input type="text" id="simChatInput" placeholder="Ketik pesan untuk Gemini..." class="flex-1 bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors">
+                                <button type="submit" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium text-xs transition-colors flex items-center gap-1">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL SETTINGS (SIMULATOR) -->
+            <div id="simSettingsModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+                <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-md p-6 space-y-6 shadow-2xl relative">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h3 class="font-bold text-lg text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-purple-400"></i> Pengaturan Quick Gemini
+                        </h3>
+                        <button id="btnCloseSettingsSim" class="text-slate-400 hover:text-white text-lg">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div class="space-y-4 text-xs">
+                        <!-- Setting 1: API Key -->
+                        <div class="space-y-1.5">
+                            <label class="font-semibold text-slate-300 flex items-center justify-between">
+                                <span>Gemini API Key</span>
+                                <a href="https://aistudio.google.com/api-keys" target="_blank" class="text-cyan-400 hover:underline text-[11px]">Dapatkan Key <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>
+                            </label>
+                            <input type="password" id="simApiKeyInput" placeholder="Paste API Key AI Studio di sini (AIzaSy...)" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-slate-100 placeholder-slate-500 focus:border-purple-500 focus:outline-none font-mono">
+                            <p class="text-[10px] text-slate-400">API Key disimpan secara lokal di browser Anda.</p>
+                        </div>
+
+                        <!-- Setting 2: Model Selection -->
+                        <div class="space-y-1.5">
+                            <label class="font-semibold text-slate-300">Pilih Model Gemini</label>
+                            <select id="simModelSelect" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-purple-500 focus:outline-none">
+                                <option value="Gemini 1.5 Flash">Gemini 1.5 Flash (Cepat & Ringan)</option>
+                                <option value="Gemini 1.5 Pro">Gemini 1.5 Pro (Kompleks & Presisi)</option>
+                            </select>
+                        </div>
+
+                        <!-- Setting 3: Theme Toggle -->
+                        <div class="space-y-1.5 pt-2 border-t border-slate-800">
+                            <label class="font-semibold text-slate-300">Mode Tampilan (Theme)</label>
+                            <div class="grid grid-cols-2 gap-3 mt-1">
+                                <button id="btnThemeDark" class="p-2.5 rounded-lg border-2 border-purple-500 bg-slate-800 text-slate-100 font-semibold flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-moon text-purple-400"></i> Dark Mode
+                                </button>
+                                <button id="btnThemeLight" class="p-2.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-sun text-yellow-400"></i> Light Mode
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btnSaveSettingsSim" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs transition-all shadow-lg">
+                        Simpan Pengaturan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 mt-20 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-2">
+            <p>Panduan Pengguna Interaktif — Quick Gemini App &copy; 2026</p>
+            <p>Ditenagai oleh teknologi Google Gemini API</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Simulator Script -->
+    <script>
+        // State Simulator
+        let isLoggedIn = false;
+        let apiKey = "";
+        let selectedModel = "Gemini 1.5 Flash";
+        let isDarkMode = true;
+
+        // Elements
+        const btnLoginSim = document.getElementById('btnLoginSim');
+        const userAvatar = document.getElementById('userAvatar');
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+        const simStatusAuth = document.getElementById('simStatusAuth');
+        
+        const btnOpenSettingsSim = document.getElementById('btnOpenSettingsSim');
+        const btnCloseSettingsSim = document.getElementById('btnCloseSettingsSim');
+        const simSettingsModal = document.getElementById('simSettingsModal');
+        const btnSaveSettingsSim = document.getElementById('btnSaveSettingsSim');
+
+        const simApiKeyInput = document.getElementById('simApiKeyInput');
+        const simModelSelect = document.getElementById('simModelSelect');
+        const currentModelBadge = document.getElementById('currentModelBadge');
+
+        const btnThemeDark = document.getElementById('btnThemeDark');
+        const btnThemeLight = document.getElementById('btnThemeLight');
+        const simulatedApp = document.getElementById('simulatedApp');
+
+        const btnNewChatSim = document.getElementById('btnNewChatSim');
+        const simChatBox = document.getElementById('simChatBox');
+        const simChatForm = document.getElementById('simChatForm');
+        const simChatInput = document.getElementById('simChatInput');
+        const simHistoryList = document.getElementById('simHistoryList');
+
+        // Toggle Login Google Simulation
+        btnLoginSim.addEventListener('click', () => {
+            isLoggedIn = !isLoggedIn;
+            if (isLoggedIn) {
+                userAvatar.innerText = "G";
+                userAvatar.classList.remove('bg-slate-700', 'text-slate-300');
+                userAvatar.classList.add('bg-purple-600', 'text-white');
+                userName.innerText = "Pengguna Google";
+                userEmail.innerText = "user@gmail.com";
+                btnLoginSim.innerText = "Logout";
+                btnLoginSim.classList.remove('bg-indigo-600');
+                btnLoginSim.classList.add('bg-slate-700');
+                simStatusAuth.innerHTML = `<i class="fa-solid fa-circle-check text-[10px]"></i> Cloud Saved`;
+                simStatusAuth.className = "px-2 py-0.5 rounded bg-green-500/20 text-green-400 border border-green-500/30 flex items-center gap-1";
+            } else {
+                userAvatar.innerText = "?";
+                userAvatar.classList.remove('bg-purple-600', 'text-white');
+                userAvatar.classList.add('bg-slate-700', 'text-slate-300');
+                userName.innerText = "Tamu (Guest)";
+                userEmail.innerText = "Silakan login Google";
+                btnLoginSim.innerText = "Login";
+                btnLoginSim.classList.remove('bg-slate-700');
+                btnLoginSim.classList.add('bg-indigo-600');
+                simStatusAuth.innerHTML = `<i class="fa-solid fa-user-slash text-[10px]"></i> Belum Login`;
+                simStatusAuth.className = "px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 flex items-center gap-1";
+            }
+        });
+
+        // Settings Modal Open/Close
+        btnOpenSettingsSim.addEventListener('click', () => {
+            simSettingsModal.classList.remove('hidden');
+        });
+
+        btnCloseSettingsSim.addEventListener('click', () => {
+            simSettingsModal.classList.add('hidden');
+        });
+
+        // Theme Toggle Buttons in Settings
+        btnThemeDark.addEventListener('click', () => {
+            isDarkMode = true;
+            btnThemeDark.className = "p-2.5 rounded-lg border-2 border-purple-500 bg-slate-800 text-slate-100 font-semibold flex items-center justify-center gap-2";
+            btnThemeLight.className = "p-2.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold flex items-center justify-center gap-2";
+            simulatedApp.className = "w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-700 shadow-2xl transition-all duration-300 bg-slate-900 text-slate-100";
+        });
+
+        btnThemeLight.addEventListener('click', () => {
+            isDarkMode = false;
+            btnThemeLight.className = "p-2.5 rounded-lg border-2 border-purple-500 bg-slate-100 text-slate-900 font-semibold flex items-center justify-center gap-2";
+            btnThemeDark.className = "p-2.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold flex items-center justify-center gap-2";
+            simulatedApp.className = "w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-300 shadow-2xl transition-all duration-300 bg-slate-100 text-slate-900";
+        });
+
+        // Save Settings
+        btnSaveSettingsSim.addEventListener('click', () => {
+            apiKey = simApiKeyInput.value.trim();
+            selectedModel = simModelSelect.value;
+            currentModelBadge.innerText = selectedModel;
+            simSettingsModal.classList.add('hidden');
+            
+            // Notification Message in Chat Box
+            appendChatMessage("system", `Settings diperbarui: Model diset ke [${selectedModel}]. Key: ${apiKey ? 'Disimpan ✓' : 'Belum Diisi ✗'}`);
+        });
+
+        // New Chat Button Logic
+        btnNewChatSim.addEventListener('click', () => {
+            simChatBox.innerHTML = '';
+            appendChatMessage("ai", "Sesi percakapan baru telah dibuat. Ada yang bisa saya bantu hari ini?");
+        });
+
+        // Send Chat Message Logic
+        simChatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = simChatInput.value.trim();
+            if (!text) return;
+
+            // User Message
+            appendChatMessage("user", text);
+            simChatInput.value = "";
+
+            // Dynamic Response AI Simulation
+            setTimeout(() => {
+                if (!apiKey) {
+                    appendChatMessage("ai", "⚠️ <strong>Peringatan:</strong> Silakan masukkan API Key Gemini Anda terlebih dahulu di menu Pengaturan!");
+                } else {
+                    appendChatMessage("ai", `[Respon dari ${selectedModel}]: Terima kasih! Ini adalah balasan simulasi untuk pesan: "${text}".`);
+                    
+                    // Add to History if Logged In
+                    if (isLoggedIn) {
+                        const historyItem = document.createElement('div');
+                        historyItem.className = "p-2 rounded-lg bg-slate-800/40 text-xs text-slate-300 flex items-center justify-between cursor-pointer hover:bg-slate-800/80 truncate";
+                        historyItem.innerHTML = `<span class="truncate"><i class="fa-regular fa-message mr-1.5"></i> ${text}</span>`;
+                        simHistoryList.prepend(historyItem);
+                    }
+                }
+            }, 600);
+        });
+
+        // Helper to Append Chat Messages
+        function appendChatMessage(sender, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = "flex items-start gap-2.5";
+            
+            if (sender === "user") {
+                msgDiv.innerHTML = `
+                    <div class="flex items-start gap-2.5 justify-end w-full">
+                        <div class="bg-purple-600 text-white p-3 rounded-xl rounded-tr-none max-w-[85%] leading-relaxed text-xs">
+                            ${text}
+                        </div>
+                        <div class="w-6 h-6 rounded-md bg-indigo-500 flex items-center justify-center text-white text-[10px] font-bold">Anda</div>
+                    </div>
+                `;
+            } else if (sender === "ai") {
+                msgDiv.innerHTML = `
+                    <div class="w-6 h-6 rounded-md bg-purple-600 flex items-center justify-center text-white text-[10px] font-bold">AI</div>
+                    <div class="${isDarkMode ? 'bg-slate-800/80 text-slate-200 border-slate-700/50' : 'bg-slate-200 text-slate-800 border-slate-300'} p-3 rounded-xl rounded-tl-none max-w-[85%] border leading-relaxed text-xs">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                msgDiv.innerHTML = `
+                    <div class="w-full text-center my-1">
+                        <span class="text-[10px] bg-purple-950/80 text-purple-300 px-3 py-1 rounded-full border border-purple-500/30">
+                            ${text}
+                        </span>
+                    </div>
+                `;
+            }
+
+            simChatBox.appendChild(msgDiv);
+            simChatBox.scrollTop = simChatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
